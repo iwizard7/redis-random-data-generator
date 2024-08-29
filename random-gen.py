@@ -1,19 +1,31 @@
+"""Скрипт для генерации случайных данных и их записи в Redis.
+
+Этот скрипт подключается к серверу Redis и заполняет его случайными данными различных типов,
+таких как строки, списки, множества, отсортированные множества и хэши.
+"""
+
+import argparse
+import random
+
 import redis
 from faker import Faker
-import random
-import argparse
 
 # Создайте объект Faker для генерации случайных данных
 fake = Faker()
 
-
-# Функция для генерации случайных данных для различных типов Redis
 def populate_redis(host, port, db, num_entries):
-    # Создайте объект Redis-клиента с заданными параметрами
+    """
+    Заполняет Redis случайными данными.
+
+    :param host: Хост сервера Redis
+    :param port: Порт сервера Redis
+    :param db: Номер базы данных Redis
+    :param num_entries: Количество записей для вставки
+    """
     try:
         r = redis.Redis(host=host, port=port, db=db)
         print(f'Connected to Redis at {host}:{port}, database {db}')
-    except Exception as e:
+    except redis.RedisError as e:
         print(f'Error connecting to Redis: {e}')
         return
 
@@ -39,8 +51,8 @@ def populate_redis(host, port, db, num_entries):
                 print(f'Set set key: {key}, values: {values}')
 
             elif data_type == 'zset':
-                values = {fake.word(): random.uniform(1, 100) for _ in range(random.randint(1, 10))}
-                r.zadd(key, {member: score for member, score in values.items()})
+                values = dict((fake.word(), random.uniform(1, 100)) for _ in range(random.randint(1, 10)))
+                r.zadd(key, values)
                 print(f'Set zset key: {key}, values: {values}')
 
             elif data_type == 'hash':
@@ -48,12 +60,13 @@ def populate_redis(host, port, db, num_entries):
                 r.hset(key, mapping=fields)
                 print(f'Set hash key: {key}, fields: {fields}')
 
-        except Exception as e:
+        except redis.RedisError as e:
             print(f'Error setting key {key}: {e}')
 
-
-# Основная функция для парсинга аргументов и запуска скрипта
 def main():
+    """
+    Основная функция для парсинга аргументов командной строки и запуска скрипта.
+    """
     parser = argparse.ArgumentParser(description='Populate Redis with random data.')
     parser.add_argument('--host', type=str, default='localhost', help='Redis server host')
     parser.add_argument('--port', type=int, default=6379, help='Redis server port')
@@ -63,7 +76,6 @@ def main():
     args = parser.parse_args()
 
     populate_redis(args.host, args.port, args.db, args.num)
-
 
 if __name__ == '__main__':
     main()
