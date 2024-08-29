@@ -50,10 +50,15 @@ def populate_redis(host, port, db, num_entries):
                 r.sadd(key, *values)
                 print(f'Set set key: {key}, values: {values}')
 
+
             elif data_type == 'zset':
-                values = dict((fake.word(), random.uniform(1, 100)) for _ in range(random.randint(1, 10)))
-                r.zadd(key, values)
-                print(f'Set zset key: {key}, values: {values}')
+                num_elements = random.randint(1, 10)
+                zset_values = {
+                    fake.word(): random.uniform(1, 100)
+                    for _ in range(num_elements)
+                }
+                r.zadd(key, zset_values)
+                print(f'Set zset key: {key}, values: {zset_values}')
 
             elif data_type == 'hash':
                 fields = {fake.word(): fake.sentence() for _ in range(random.randint(1, 10))}
