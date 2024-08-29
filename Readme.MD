@@ -24,7 +24,7 @@
 Запустите скрипт, передав необходимые параметры:
 
 ```bash
-python random-gen.py --host <REDIS_HOST> --port <REDIS_PORT> --db <REDIS_DB> --num <NUM_ENTRIES>
+python random_gen.py --host <REDIS_HOST> --port <REDIS_PORT> --db <REDIS_DB> --num <NUM_ENTRIES>
 ```
 
 Где:
@@ -36,7 +36,7 @@ python random-gen.py --host <REDIS_HOST> --port <REDIS_PORT> --db <REDIS_DB> --n
 ### Пример
 
 ```bash
-python random-gen.py --host 127.0.0.1 --port 6379 --db 0 --num 100
+python random_gen.py --host 127.0.0.1 --port 6379 --db 0 --num 100
 ```
 
 Этот пример создаст 100 случайных записей и загрузит их в базу данных Redis на локальном сервере.
