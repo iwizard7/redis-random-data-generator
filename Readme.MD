@@ -1,3 +1,4 @@
+[![Pylint](https://github.com/iwizard7/redis-random-data-generator/actions/workflows/pylint.yml/badge.svg)](https://github.com/iwizard7/redis-random-data-generator/actions/workflows/pylint.yml)
 # Redis Random Data Generator ⚙️
 
 ## Описание
