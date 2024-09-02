@@ -1,4 +1,4 @@
-[![Pylint](https://github.com/iwizard7/redis-random-data-generator/actions/workflows/pylint.yml/badge.svg)](https://github.com/iwizard7/redis-random-data-generator/actions/workflows/pylint.yml)
+[![Pylint](https://github.com/iwizard7/redis-random-data-generator/actions/workflows/pylint.yml/badge.svg)](https://github.com/iwizard7/redis-random-data-generator/actions/workflows/pylint.yml) [![CodeQL](https://github.com/iwizard7/redis-random-data-generator/actions/workflows/codeql.yml/badge.svg)](https://github.com/iwizard7/redis-random-data-generator/actions/workflows/codeql.yml)
 # Redis Random Data Generator ⚙️
 
 ## Описание
